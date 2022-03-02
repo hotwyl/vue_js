@@ -21,8 +21,8 @@
         </header>
 
         <main class="My-3 p-5">
-            <button class="btn btn-danger">LIMPAR</button>
-            <button class="btn btn-primary">ENVIAR</button>
+            <button v-bind:class="btnClassLimpar" :style="btnStyleLimpar">LIMPAR</button>
+            <button v-bind:class="btnClassEnviar" :style="btnStyleEnviar">ENVIAR</button>
         </main>
 
         <footer class="py-3 my-4">
