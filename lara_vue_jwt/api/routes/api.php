@@ -15,6 +15,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/ping', function () {
+    return [
+        'pong' => true
+    ];
+});
+
 Route::post('login', [AuthController::class, 'login']);
 
 // Route::group([
