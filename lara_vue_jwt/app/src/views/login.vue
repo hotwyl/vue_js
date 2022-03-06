@@ -34,26 +34,48 @@
 </template>
 
 <script lang="ts">
+import Cookie from 'js-cookie';
+
 export default {
   name: "Login",
 
   data() {
     return {
-        email: '',
-        password: '',
+      email: "",
+      password: "",
     };
   },
 
   methods: {
-      submit(){
-          fetch(input: '')
-      },
+    submit() {
+      const payload = {
+        email: this.email,
+        password: this.password,
+      };
+
+      fetch(
+        'https://dev.3wonline.com/prod/vue/lara_vue_jwt/api/public/api/login',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Access': 'application/json',
+          },
+
+          body: JSON.stringify(payload),
+        }
+      )
+        .then((response) => response.json())
+        .then((res) => {
+          Cookie.set('_myapp_token', res.access_token);
+          console.log(res);
+        });
+    },
   },
 };
 </script>
 
 <style>
-
 html,
 body {
   height: 100%;
@@ -93,8 +115,6 @@ body {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
-
-
 
 .bd-placeholder-img {
   font-size: 1.125rem;
