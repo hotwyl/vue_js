@@ -3,8 +3,7 @@
     <h1>This is an about page</h1>
   </div>
 
-  <div v-for="(pokemon, i) in pokemons" :key="i">
-  <p>{{ pokemon.name }}</p></div>
+  <div v-for="(pokemon, i) in pokemons" :key="i"><p>{{ pokemon.name }}</p></div>
 </template>
 
 <style>
