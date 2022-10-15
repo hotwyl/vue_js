@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>vue teste demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+        
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <style>
+      /* zerar configurações css da pagina */
+      *{
+        margin: 0;
+        padding: 0;
+        /*border: 0;*/
+        box-sizing: border-box;
+        font-family: Arial, Helvetica, sans-serif;
+	      font-size: 100%;
+      }
+    </style>
+    
+  </head>
+
+  <body class="container">
+
+    <div id="app">
+
+      <div class="row mt-5 pt-5">
+
+        <div class="col">
+          <button class="btn btn-primary btn-sm" type="button" v-on:click="mostrar" v-if="!mostrar_div" />Mostrar</button>
+          <button class="btn btn-danger btn-sm" type="button" v-on:click="esconder" v-if="mostrar_div" />Esconder</button>
+          <span v-if="mostrar_div" class="m-3">{{ message }}</span>          
+        </div>
+
+        <div class="col-2">
+          <button class="btn btn-secondary btn-sm" @click="increment">Clicks - {{ count }}</button>
+        </div>
+
+        <div class="col-2">
+          <button class="btn btn-success btn-sm" @click="alert">Alert</button>
+        </div>
+
+        <div class="col-2">
+          <button class="btn btn-warning btn-sm" @click="requisicao">Requisicao</button>
+        </div>
+      </div>
+
+      <hr />
+      
+      <div v-show="author">
+        <p> O Autor {{ fullName }} tem {{ calculateBooksPublished }} publicados: </p>
+        <ul v-if="calculateBooksPublished>0">
+          <li v-for="(book, index) in author.books" :key="index">{{ book }}</li>
+        </ul>
+      </div>
+
+      <hr />
+
+      <div class="row">
+
+        <div class="col">
+          <input type="text" v-model="nome" placeholder="digite um nome"> {{nome}}
+        </div>
+
+        <div class="col">
+          <select v-model="select">
+            <option v-for="(opt, index) in options" :key="index" :value="opt">{{ opt }}</option>
+          </select>
+          <span class="m-5">O item selecionado foi: {{ select }} - e alteramos {{ qtd }} vezes.</span>
+        </div>
+
+      </div>
+
+      <hr />
+
+      <div id="div-x" class="div">
+
+        <p>Esse é um parágrafo contendo formataçãoes como <b>negrito</b>, <i>itálico</i> e <s>riscado</s>.</p>
+
+        <h1>Título 1</h1>
+        <h2>Título 3</h2>
+        <h3>Título 3</h3>
+
+        <p>Paragrafo</p>
+
+        <ul>
+          <li>1º Item</li>
+          <li>2º Item</li>
+          <li>3º Item</li>
+        </ul>
+
+      </div>
+
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+    
+    <script>
+
+      /* monta tela */
+      const app = { 
+      
+        data() {
+          return {
+            message: 'Hello Vue!',
+            count: 0,
+            author: {
+              firstName: 'John',
+              lastName: 'Doe',
+              books: [
+                'Vue 1 - Basic Guide',
+                'Vue 2 - Advanced Guide',
+                'Vue 3 - he Mystery',
+              ]
+            },
+            mostrar_div:true,
+            nome: '',
+            options: [
+                'opção 1',
+                'opção 2',
+                'opção 3',
+                'opção 4',
+                'opção 5' 
+            ],
+            select:'',
+            qtd:0,
+          }
+        },
+
+        /* criação da aplicação */
+        created() {
+          console.log('created')
+        },
+
+        /* carregamento da aplicação */
+        mounted() {
+          console.log('mounted')
+
+          let teste = document.querySelector(".div")
+          console.log(teste)
+        },
+
+        /* executa automaticamente*/
+        computed: {
+          now() {
+            return Date.now()
+          },
+          publishedBooksMessage() {
+            return this.author.books.length > 0 ? 'Yes' : 'No'
+          },
+          calculateBooksPublished() {
+            return this.author.books.length
+          },
+          fullName() {
+              return this.author.firstName + ' ' + this.author.lastName
+          }
+        },
+
+        /* executa na chamada */
+        methods: {
+          increment() {
+            this.count++
+          },
+
+          mostrar(){
+            this.mostrar_div = true
+          },
+          esconder(){
+            this.mostrar_div = false
+          },
+
+          requisicao() {
+            var url = "https://pokeapi.co/api/v2/pokemon";
+
+            $.ajax({
+                url: url,
+                type: 'GET',
+                dataType: 'json',
+                success: function(response) {
+                    console.log(response.results)
+                }
+            });
+
+            axios({
+                method: "get",
+                url: url,
+                responseType: "json",
+            }).then(function (response) {
+                console.log(response.data.results)
+            });
+
+            fetch(url)
+            .then(response => response.json())
+            .then(console.log);
+          },
+
+          alert(){
+
+            /*switch alert */
+
+            let link = "<a href=''>info</a>";
+
+            const swalWithBootstrapButtons = Swal.mixin({
+              customClass: {
+                confirmButton: 'btn btn-success btn-sm',
+                cancelButton: 'btn btn-danger btn-sm'
+              },
+              buttonsStyling: false
+            })
+
+            swalWithBootstrapButtons.fire({
+              title: 'Tem certeza?',
+              html: "Você não será capaz de reverter isso! " + link,
+              icon: 'warning',
+              showCancelButton: true,
+              confirmButtonText: 'Sim, executar',
+              cancelButtonText: 'Não, executar',
+              reverseButtons: true
+            }).then((result) => {
+              if (result.isConfirmed) {
+                swalWithBootstrapButtons.fire(
+                  'Sucesso',
+                  'Sua solicitação executada com sucesso.',
+                  'success'
+                )
+              } else if (
+                result.dismiss === Swal.DismissReason.cancel
+              ) {
+                swalWithBootstrapButtons.fire(
+                  'Cancelado',
+                  'Sua solicitação foi cancelada.',
+                  'error'
+                )
+              }
+            })
+          }
+        
+        },
+      
+        /* observe */
+        watch:{
+          select: function(){
+            this.qtd++;
+          }
+        }
+      
+      }
+
+      /* renderiza tela */
+      Vue.createApp(app).mount('#app')
+
+    </script>
+    
+  </body>
+</html>

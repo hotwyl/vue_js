@@ -1,0 +1,43 @@
+https://duvidas.bem-vindo.net/330/restringindo-acesso-ao-seu-site-exceto-para-o-seu-endereco-ip
+
+
+Access-Control-Allow-Origin: http://foo.example
+
+$validos = array('10.11.30.175', '10.11.30.182');
+if (! in_array($_SERVER['REMOTE_ADDR'], $validos)) die('Site em manutenção, voltaremos em instantes');
+
+<Directory "/var/www/html">    Options Indexes FollowSymLinks
+	AllowOverride None
+	Require all granted
+	Require ip 192.168.0.10
+	Require ip 10.11.30.175
+ 	Require ip 10.11.30.182
+</Directory>
+
+================
+
+APACHE 2.4
+
+<RequireAll>
+	Require all granted
+	Require ip 123.123.123.123
+</RequireAll>
+
+<Limit GET POST>
+ Require all denied
+ Require ip 192.168.0.10
+ Require ip 10.11.30.175
+ Require ip 10.11.30.182
+</Limit>
+
+================
+
+APACHE 2.2
+
+<Limit GET POST>
+ order deny,allow
+ deny from all
+ allow from 192.168.0.10
+ allow from 10.11.30.175
+ allow from 10.11.30.182
+</Limit>
