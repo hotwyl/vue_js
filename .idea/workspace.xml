@@ -22,6 +22,11 @@
         <option name="title" value="All" />
       </GitPushTagMode>
     </option>
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GithubPullRequestsUISettings">
@@ -44,6 +49,7 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "ToolWindowVersion Control.ShowToolbar": "false",
     "WebServerToolWindowFactoryState": "false",
     "last_opened_file_path": "/home/hotwyl/vue_js",
     "node.js.detected.package.eslint": "true",
@@ -63,6 +69,7 @@
       <option name="presentableId" value="Default" />
       <updated>1665850595655</updated>
       <workItem from="1665850597889" duration="2248000" />
+      <workItem from="1665857071857" duration="487000" />
     </task>
     <task id="LOCAL-00001" summary="teste">
       <created>1665856181526</created>
@@ -78,7 +85,21 @@
       <option name="project" value="LOCAL" />
       <updated>1665856605259</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="teste">
+      <created>1665857096421</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1665857096421</updated>
+    </task>
+    <task id="LOCAL-00004" summary="teste">
+      <created>1665857266017</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1665857266017</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
